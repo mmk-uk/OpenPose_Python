@@ -4,6 +4,7 @@ import os
 from sys import platform
 import argparse
 import time
+import hand_module as hm
 
 # Import Openpose (Windows/Ubuntu/OSX)
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -50,6 +51,7 @@ for i in range(0, len(args[1])):
 # op.init_argv(args[1])
 # oppython = op.OpenposePython()
 
+
 try:
     # Starting OpenPose
     opWrapper = op.WrapperPython()
@@ -65,15 +67,19 @@ try:
     # Process and display image
     opWrapper.emplaceAndPop([datum])
     #print(type(datum.poseKeypoints))  #<class 'numpy.ndarray'>
-    print("Body keypoints: \n")
+    #print("Body keypoints: \n")
     #print(datum.poseKeypoints)
-    for person in datum.poseKeypoints:
-        for keypoint in person:
-            print("{0}\t{1}\t{2}\n".format(keypoint[0],keypoint[1],keypoint[2]))
-    print("Left hand keypoints: \n")
-    print(datum.handKeypoints[0])
+    #for person in datum.poseKeypoints:
+        #for keypoint in person:
+            #print("{0}\t{1}\t{2}\n".format(keypoint[0],keypoint[1],keypoint[2]))
+    #print("Left hand keypoints: \n")
+    #print(datum.handKeypoints[0])
     print("Right hand keypoints: \n")
-    print(datum.handKeypoints[1])
+    right_hand = []
+    for point in datum.handKeypoints[1][0]:
+        right_hand.append((point[0],point[1]))
+    #print(right_hand)
+    print(hm.check_handform(right_hand))
     cv2.imshow("OpenPose 1.5.0 - Tutorial Python API", datum.cvOutputData)
     cv2.waitKey(0)
 except Exception as e:

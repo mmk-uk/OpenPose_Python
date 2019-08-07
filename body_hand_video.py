@@ -5,6 +5,7 @@ import os
 from sys import platform
 import argparse
 import time
+import hand_module as hm
 
 
 # Import Openpose (Windows/Ubuntu/OSX)
@@ -49,6 +50,16 @@ while(True):
     opWrapper.emplaceAndPop([datum])
 
     cv2.imshow("OpenPose 1.5.0 - Tutorial Python API", datum.cvOutputData)
+
+    #print(datum.handKeypoints[1][0])
+    right_hand = []
+    flag = True
+    for point in datum.handKeypoints[1][0]:
+        right_hand.append((point[0],point[1]))
+        if point[0]==0. and point[1]==0. and point[2]==0.:
+            flag = False
+    if flag == True:
+        print(hm.check_handform2(right_hand))
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

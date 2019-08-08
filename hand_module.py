@@ -46,7 +46,7 @@ def check_handform(right_hand):
 def check_handform2(rh):
     handform = []
     #親指
-    if (distance(rh[2],rh[3])+distance(rh[3],rh[4]))*0.95 > distance(rh[2],rh[4]):
+    if distance(rh[5],rh[17]) > distance(rh[3],rh[17]):
         handform.append(0)
     else:
         handform.append(1)

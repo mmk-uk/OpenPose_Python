@@ -1,6 +1,16 @@
 import numpy as np
 import math
 
+#手を認識しているかどうかを調べる関数（＋右手のキーポイント座標の配列を返す）
+def is_hand_recog(handdata):
+    right_hand = []
+    flag = True
+    for point in handdata:
+        right_hand.append((point[0],point[1]))
+        if point[0]==0. and point[1]==0. and point[2]==0.:
+            flag = False
+    return right_hand,flag
+
 
 #３点からなる角度を求める関数
 def joint_angle(A,B,C):
@@ -46,7 +56,7 @@ def check_handform(right_hand):
 def check_handform2(rh):
     handform = []
     #親指
-    if distance(rh[5],rh[17]) > distance(rh[3],rh[17]):
+    if distance(rh[5],rh[17])*1.1 > distance(rh[4],rh[17]):
         handform.append(0)
     else:
         handform.append(1)
@@ -72,3 +82,19 @@ def check_handform2(rh):
         handform.append(1)
 
     return handform
+
+def list_to_num(ls):
+    if ls == [0,0,0,0,0]:
+        return '0'
+    elif ls == [0,1,0,0,0]:
+        return '1'
+    elif ls == [0,1,1,0,0]:
+        return '2'
+    elif ls == [0,1,1,1,0]:
+        return '3'
+    elif ls == [0,1,1,1,1]:
+        return '4'
+    elif ls == [1,1,1,1,1]:
+        return '5'
+    else:
+        return '*'

@@ -11,12 +11,14 @@ import hand_module as hm
 
 root = tk.Tk()
 root.title("認識結果")
-root.geometry("300x300")
+root.geometry("600x600+1200+50")
 
-canvas = tk.Canvas(root,width=300,height=300)
+rootFlag = True
+
+canvas = tk.Canvas(root,width=600,height=600)
 canvas.grid()
 
-canvas.create_text(150,150,text='',font=('',100))
+canvas.create_text(300,300,text='',font=('',350))
 
 # Import Openpose (Windows/Ubuntu/OSX)
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -38,7 +40,9 @@ except ImportError as e:
     raise e
 
 def display(root):
+    global rootFlag
     root.mainloop()
+    rootFlag = False
 
 def openpose_demo(canvas):
     # Custom Params (refer to include/openpose/flags.hpp for more parameters)
@@ -56,6 +60,7 @@ def openpose_demo(canvas):
     before_form = []
     current_form = []
     counter = 0
+    global rootFlag
     while(True):
         ret,frame = cap.read()
 
@@ -74,28 +79,28 @@ def openpose_demo(canvas):
         if flag == True:
             current_form = hm.check_handform2(right_hand)
             #print(current_form,counter)
-            if current_form == before_form:
-                counter = counter + 1
-                if(counter == 10):
+            if current_form == before_form:   #1フレーム前の形と現在の形を比較する
+                counter = counter + 1  #同じだったらカウントを１増やす
+                if(counter == 10): #カウントが10になったら（10回連続して同じ形を認識したら）
                     canvas.delete("all")
-                    n = hm.list_to_num(current_form)
+                    n = hm.list_to_num(current_form) #手の形から番号を決定
                     try:
-                        canvas.create_text(150,150,text=n,font=('',100))
+
+                        canvas.create_text(300,300,text=n,font=('',350))
                     except Exception as e:
                         break
             else:
-                counter = 0
+                counter = 0 #違ったらカウントをリセットする
             before_form = current_form
         if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+        if rootFlag == False:
             break
     cap.release()
     cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":
-    #th1 = threading.Thread(target=display,args=(root,))
     th2 = threading.Thread(target=openpose_demo,args=(canvas,))
-
-    #th1.start()
     th2.start()
     display(root)

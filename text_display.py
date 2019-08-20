@@ -5,25 +5,31 @@ import tkinter as tk
 
 root = tk.Tk()
 root.title("認識結果")
-root.geometry("300x300")
+root.geometry("600x600+1200+50")
 
-canvas = tk.Canvas(root,width=300,height=300)
+rootFlag = True
+
+
+canvas = tk.Canvas(root,width=600,height=600)
 canvas.grid()
 
-canvas.create_text(150,150,text='5',font=('',100))
+canvas.create_text(300,300,text='5',font=('',250))
 
 def display(root):
+    global rootFlag
     root.mainloop()
+    rootFlag = False
 
 def input_text(canvas):
+    global rootFlag
     n=0
     while True:
 
         n = input()
-        canvas.delete("all")
-        if n == 'a':
+        if n == 'a' or rootFlag == False:
             break
-        canvas.create_text(150,150,text=n,font=('',100))
+        canvas.delete("all")
+        canvas.create_text(300,300,text=n,font=('',350))
         #n+=1
         #canvas.create_text(150,150,text=str(n),font=('',100))
         #time.sleep(1)

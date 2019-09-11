@@ -55,7 +55,7 @@ def openpose_demo(canvas):
     opWrapper.configure(params)
     opWrapper.start()
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1) #0だったり1だったり
 
     before_form = []
     current_form = []
@@ -71,11 +71,14 @@ def openpose_demo(canvas):
 
         opWrapper.emplaceAndPop([datum])
 
+        cv2.namedWindow("OpenPose 1.5.0 - Tutorial Python API", cv2.WINDOW_KEEPRATIO | cv2.WINDOW_NORMAL) #ウィンドウサイズを可変に
         cv2.imshow("OpenPose 1.5.0 - Tutorial Python API", datum.cvOutputData)
 
         #print(datum.handKeypoints[1][0])
 
         right_hand,flag = hm.is_hand_recog(datum.handKeypoints[1][0])
+        #カメラの指定によっては「IndexError: too many indices for array」というエラーが出る
+
         if flag == True:
             current_form = hm.check_handform2(right_hand)
             #print(current_form,counter)

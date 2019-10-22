@@ -6,6 +6,12 @@ import argparse
 import time
 import hand_module as hm
 
+face_cascade_path = 'haarcascade_frontalface_default.xml'
+eye_cascade_path = 'haarcascade_eye.xml'
+
+face_cascade = cv2.CascadeClassifier(face_cascade_path)
+eye_cascade = cv2.CascadeClassifier(eye_cascade_path)
+
 # Import Openpose (Windows/Ubuntu/OSX)
 dir_path = os.path.dirname(os.path.realpath(__file__))
 try:
@@ -67,8 +73,12 @@ try:
     # Process and display image
     opWrapper.emplaceAndPop([datum])
     #print(type(datum.poseKeypoints))  #<class 'numpy.ndarray'>
-    #print("Body keypoints: \n")
-    #print(datum.poseKeypoints)
+    print("Body keypoints: \n")
+    print(datum.poseKeypoints)
+    #頭部の座標を取得
+    head_x = int(datum.poseKeypoints[0][0][0])
+    head_y = int(datum.poseKeypoints[0][0][1])
+    print(head_x,head_y)
     #for person in datum.poseKeypoints:
         #for keypoint in person:
             #print("{0}\t{1}\t{2}\n".format(keypoint[0],keypoint[1],keypoint[2]))
@@ -80,7 +90,24 @@ try:
         right_hand.append((point[0],point[1]))
     #print(right_hand)
     print(hm.check_handform(right_hand))
-    cv2.imshow("OpenPose 1.5.0 - Tutorial Python API", datum.cvOutputData)
+    #cv2.imshow("OpenPose 1.5.0 - Tutorial Python API", datum.cvOutputData)
+
+    resultimage = imageToProcess
+
+    src_gray = cv2.cvtColor(resultimage, cv2.COLOR_BGR2GRAY)
+
+    faces = face_cascade.detectMultiScale(src_gray)
+
+    for x, y, w, h in faces:
+        cv2.rectangle(resultimage, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        face = resultimage[y: y + h, x: x + w]
+        face_gray = src_gray[y: y + h, x: x + w]
+        eyes = eye_cascade.detectMultiScale(face_gray)
+        for (ex, ey, ew, eh) in eyes:
+            cv2.rectangle(face, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
+
+    cv2.imwrite('data/dst/opencv_face_detect_rectangle.jpg', resultimage)
+
     cv2.waitKey(0)
 except Exception as e:
     # print(e)

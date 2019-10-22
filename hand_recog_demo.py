@@ -39,6 +39,10 @@ except ImportError as e:
     print('Error: OpenPose library could not be found. Did you enable `BUILD_PYTHON` in CMake and have this Python script in the right folder?')
     raise e
 
+def adjust(img, alpha=1.0, beta=0.0):
+    dst = alpha * img + beta
+    return np.clip(dst,0,255).astype(np.uint8)
+
 def display(root):
     global rootFlag
     root.mainloop()
@@ -55,7 +59,7 @@ def openpose_demo(canvas):
     opWrapper.configure(params)
     opWrapper.start()
 
-    cap = cv2.VideoCapture(1) #0だったり1だったり
+    cap = cv2.VideoCapture(0) #0だったり1だったり
 
     before_form = []
     current_form = []
@@ -63,6 +67,8 @@ def openpose_demo(canvas):
     global rootFlag
     while(True):
         ret,frame = cap.read()
+
+        frame = adjust(frame,alpha=1.0,beta=-25.0)
 
         # Process Image
         datum = op.Datum()
@@ -75,8 +81,10 @@ def openpose_demo(canvas):
         cv2.imshow("OpenPose 1.5.0 - Tutorial Python API", datum.cvOutputData)
 
         #print(datum.handKeypoints[1][0])
-
-        right_hand,flag = hm.is_hand_recog(datum.handKeypoints[1][0])
+        try:
+            right_hand,flag = hm.is_hand_recog(datum.handKeypoints[1][0])
+        except Exception as e:
+            continue
         #カメラの指定によっては「IndexError: too many indices for array」というエラーが出る
 
         if flag == True:
@@ -84,11 +92,10 @@ def openpose_demo(canvas):
             #print(current_form,counter)
             if current_form == before_form:   #1フレーム前の形と現在の形を比較する
                 counter = counter + 1  #同じだったらカウントを１増やす
-                if(counter == 10): #カウントが10になったら（10回連続して同じ形を認識したら）
+                if(counter == 2): #カウントが10になったら（10回連続して同じ形を認識したら）
                     canvas.delete("all")
                     n = hm.list_to_num(current_form) #手の形から番号を決定
                     try:
-
                         canvas.create_text(300,300,text=n,font=('',350))
                     except Exception as e:
                         break

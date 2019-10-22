@@ -43,11 +43,12 @@ class RTSPVideoWriterObject(object):
         self.output_video.write(self.frame)
 
 if __name__ == '__main__':
-    rtsp_stream_link = 'http://192.168.0.10/axis-cgi/mjpg/video.cgi'
+    rtsp_stream_link = 'rtsp://admin:888888@192.168.10.101:10554'
     video_stream_widget = RTSPVideoWriterObject(rtsp_stream_link)
     while True:
         try:
             video_stream_widget.show_frame()
             video_stream_widget.save_frame()
         except AttributeError:
+            #print("読み込めてない")
             pass

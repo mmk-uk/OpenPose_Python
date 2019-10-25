@@ -1,0 +1,1 @@
+cd Muranaka/openpose_ws/openpose/build/examples/openpose_python

@@ -33,7 +33,7 @@ except ImportError as e:
 
 # Flags
 parser = argparse.ArgumentParser()
-parser.add_argument("--image_path", default="../../../examples/media/COCO_val2014_000000000459.jpg", help="Process an image. Read all standard formats (jpg, png, bmp, etc.).")
+parser.add_argument("--image_path", default="../../../examples/media/745836d2ef6da99d30bb12e4e9655925.jpg", help="Process an image. Read all standard formats (jpg, png, bmp, etc.).")
 args = parser.parse_known_args()
 
 # Custom Params (refer to include/openpose/flags.hpp for more parameters)
@@ -90,7 +90,7 @@ try:
         right_hand.append((point[0],point[1]))
     #print(right_hand)
     print(hm.check_handform(right_hand))
-    #cv2.imshow("OpenPose 1.5.0 - Tutorial Python API", datum.cvOutputData)
+    cv2.imshow("OpenPose 1.5.0 - Tutorial Python API", datum.cvOutputData)
 
     resultimage = imageToProcess
 

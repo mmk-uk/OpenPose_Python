@@ -60,6 +60,8 @@ def openpose_demo(canvas):
     opWrapper.start()
 
     cap = cv2.VideoCapture(0) #0だったり1だったり
+    cap.set(3,640)
+    cap.set(4,480)
 
     before_form = []
     current_form = []
@@ -67,8 +69,9 @@ def openpose_demo(canvas):
     global rootFlag
     while(True):
         ret,frame = cap.read()
+        cv2.imshow('Raw Frame', frame)
 
-        frame = adjust(frame,alpha=1.0,beta=-25.0)
+        #frame = adjust(frame,alpha=1.0,beta=-25.0)
 
         # Process Image
         datum = op.Datum()

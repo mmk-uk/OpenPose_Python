@@ -60,8 +60,10 @@ def openpose_demo(canvas):
     opWrapper.start()
 
     cap = cv2.VideoCapture(0) #0だったり1だったり
-    cap.set(3,640)
-    cap.set(4,480)
+    #cap.set(3,1280)
+    #cap.set(4,960)
+    cap.set(3,1920)
+    cap.set(4,1080)
 
     before_form = []
     current_form = []
@@ -69,7 +71,9 @@ def openpose_demo(canvas):
     global rootFlag
     while(True):
         ret,frame = cap.read()
-        cv2.imshow('Raw Frame', frame)
+        #cv2.imshow('Raw Frame', frame)
+        #frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+        #frame = cv2.cvtColor(frame,cv2.COLOR_GRAY2RGB)
 
         #frame = adjust(frame,alpha=1.0,beta=-25.0)
 
@@ -92,18 +96,23 @@ def openpose_demo(canvas):
 
         if flag == True:
             current_form = hm.check_handform2(right_hand)
-            #print(current_form,counter)
+            print(hm.list_to_num(current_form))
             if current_form == before_form:   #1フレーム前の形と現在の形を比較する
                 counter = counter + 1  #同じだったらカウントを１増やす
-                if(counter == 2): #カウントが10になったら（10回連続して同じ形を認識したら）
+                if(counter == 5): #カウントが10になったら（10回連続して同じ形を認識したら）
                     canvas.delete("all")
                     n = hm.list_to_num(current_form) #手の形から番号を決定
+                    
                     try:
                         canvas.create_text(300,300,text=n,font=('',350))
                     except Exception as e:
                         break
             else:
                 counter = 0 #違ったらカウントをリセットする
+                try:
+                    canvas.create_text(300,300,text=" ",font=('',350))
+                except Exception as e:
+                    break
             before_form = current_form
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

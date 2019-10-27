@@ -3,9 +3,11 @@ from pykinect2.PyKinectV2 import *
 from pykinect2 import PyKinectRuntime
 import numpy as np
 import cv2
+import ctypes
+import _ctypes
 
 
-kinect_ir = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Infrared)
+kinect_ir = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Infrared | PyKinectV2.FrameSourceTypes_Depth)
 kinect_color = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Color | PyKinectV2.FrameSourceTypes_Body | PyKinectV2.FrameSourceTypes_Depth)
 depth_width, depth_height = kinect_ir.depth_frame_desc.Width, kinect_ir.depth_frame_desc.Height
 
@@ -55,9 +57,24 @@ while True:
         #print(thresh1.shape)
         thresh1 = correction(thresh1)
         thresh1 = cv2.cvtColor(thresh1, cv2.COLOR_GRAY2RGB)
+        M = np.float32([[1,0,7],[0,1,0]])
+        thresh1 = cv2.warpAffine(thresh1,M,(512,424))
+        #kernel = np.ones((5,5),np.uint8)
+        #thresh1 = cv2.dilate(thresh1,kernel,iterations = 1)
         #print(thresh1.shape)
-        #cv2.imshow('KINECT Video Stream1', thresh1)
+        cv2.imshow('KINECT Video Stream1', thresh1)
 
+        #ptr_depth = np.ctypeslib.as_ctypes(kinect_color.get_last_depth_frame().flatten())
+        #TYPE_ColorSpacePoint_Array = PyKinectV2._ColorSpacePoint * (424 * 512)
+        #csps = TYPE_ColorSpacePoint_Array()
+        #error_state = kinect_color._mapper.MapDepthFrameToColorSpace(424 * 512, ptr_depth, 424 * 512, csps)
+        #print(error_state)
+
+        #CSP_Count = kinect_color._depth_frame_data_capacity
+        #CSP_type = PyKinectV2._ColorSpacePoint * CSP_Count.value
+        #CSP = ctypes.cast(CSP_type(), ctypes.POINTER(PyKinectV2._ColorSpacePoint))
+        #map = kinect_color._mapper.MapDepthFrameToColorSpace(kinect_color._depth_frame_data_capacity,kinect_color._depth_frame_data, CSP_Count, CSP)
+        #print(map)
 
     #if kinect_color.has_new_color_frame():
         frame_color = kinect_color.get_last_color_frame()
@@ -67,7 +84,7 @@ while True:
         frame_color = frame_color[:,121:633]
         #print(frame.shape)
         frame_color = cv2.cvtColor(frame_color, cv2.COLOR_RGBA2RGB)
-        #cv2.imshow('KINECT Video Stream2', frame_color)
+        cv2.imshow('KINECT Video Stream2', frame_color)
 
         dst = cv2.bitwise_and(frame_color, thresh1)
 

@@ -56,27 +56,27 @@ def check_handform(right_hand):
 def check_handform2(rh):
     handform = []
     #親指
-    if distance(rh[5],rh[17])*1.1 > distance(rh[4],rh[17]):
+    if distance(rh[5],rh[17])*1.2 > distance(rh[4],rh[17]):
         handform.append(0)
     else:
         handform.append(1)
     #人差し指
-    if distance(rh[0],rh[5])*1.1 > distance(rh[0],rh[8]):
+    if distance(rh[0],rh[5])*1.2 > distance(rh[0],rh[8]):
         handform.append(0)
     else:
         handform.append(1)
     #中指
-    if distance(rh[0],rh[9])*1.1 > distance(rh[0],rh[12]):
+    if distance(rh[0],rh[9])*1.2 > distance(rh[0],rh[12]):
         handform.append(0)
     else:
         handform.append(1)
     #薬指
-    if distance(rh[0],rh[13])*1.1 > distance(rh[0],rh[16]):
+    if distance(rh[0],rh[13])*1.2> distance(rh[0],rh[16]):
         handform.append(0)
     else:
         handform.append(1)
     #小指
-    if distance(rh[0],rh[18])*1.05 > distance(rh[0],rh[19]):
+    if distance(rh[0],rh[18])*1.1 > distance(rh[0],rh[19]):
         handform.append(0)
     else:
         handform.append(1)

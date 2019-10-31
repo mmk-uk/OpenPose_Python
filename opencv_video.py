@@ -19,7 +19,7 @@ while True:
     if not ret:
         continue
 
-    print(frame.shape)
+    #print(frame.shape)
     cv2.imshow('Raw Frame', frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):

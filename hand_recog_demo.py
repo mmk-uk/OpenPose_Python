@@ -96,13 +96,13 @@ def openpose_demo(canvas):
 
         if flag == True:
             current_form = hm.check_handform2(right_hand)
-            print(hm.list_to_num(current_form))
+            #print(current_form)
             if current_form == before_form:   #1フレーム前の形と現在の形を比較する
                 counter = counter + 1  #同じだったらカウントを１増やす
                 if(counter == 5): #カウントが10になったら（10回連続して同じ形を認識したら）
                     canvas.delete("all")
                     n = hm.list_to_num(current_form) #手の形から番号を決定
-                    
+
                     try:
                         canvas.create_text(300,300,text=n,font=('',350))
                     except Exception as e:

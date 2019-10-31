@@ -1,1 +1,4 @@
 cd Muranaka/openpose_ws/openpose/build/examples/openpose_python
+
+C:\Users\namajika\AppData\Local\Programs\Python\Python37\Scripts\
+C:\Users\namajika\AppData\Local\Programs\Python\Python37\

@@ -3,9 +3,9 @@ from __future__ import division
 import re
 import sys
 
-from google.cloud import speech
-from google.cloud.speech import enums
-from google.cloud.speech import types
+from google.cloud import speech_v1 as speech
+from google.cloud.speech_v1 import enums
+from google.cloud.speech_v1 import types
 import pyaudio
 from six.moves import queue
 

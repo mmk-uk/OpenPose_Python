@@ -152,7 +152,7 @@ def openpose_demo(onoff,vol,volcon,now):
     opWrapper.configure(params)
     opWrapper.start()
 
-    cap = cv2.VideoCapture(0) #0だったり1だったり
+    cap = cv2.VideoCapture(1) #0だったり1だったり
     #cap.set(3,1280)
     #cap.set(4,960)
     cap.set(3,1920)

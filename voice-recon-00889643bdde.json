@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "skillful-air-257614",
+  "private_key_id": "00889643bddeb05d100bba540f89d3ec9b24f4e7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/BojU1Ss7l7qO\n9WcGPkGXKY7tszzmyZH27vdiMwobbPuLux3b9t5GHWf4DMLoWgsTJ+IDG/pIjUU+\nyLpCVsL5K1OlTR53QgrS8UcZT/wJKJSAgmjawpP/nefS8I/GT8z4QUGyztUioiub\nvlPLI7tdaGM8kVys65m7q0Wj8G8SU/A89CZkK4b+TByMZC2GPrj1vrRZTGEbb3xs\n/WBz1ygsouvtiqlX+cx41cFFR3qxD6j4VMsXJ5FHqMWOsrSDhF8eFTdneqek/s5n\nZ3QqY4H0CCxG7MCMlj5W+K0K35sykDVby3kvau6FIxcrR4ABqYcA6tI2kVTEf5WW\nCH01yOpZAgMBAAECggEAFZfPYJCSnR9A+j809LyVlTjgRFAMGLHtFx7K1b27fR9n\n/VLq1IYeuMoC6kQGBbYE9ba+yndvhqM6cjcGL/DHBBuwzjkOEjDD0LWvoeW70Yy1\n4aNsJxtS17SRo5NoCySS4Laerq/I4av3djjQ17/7olrGCe8MDOtqYq+A9R+87HMg\nSpB+B0xKX+8bHECca/bfVEh5XPN6fwE8Jouuj/64hOjevqeFHwN/bArQWRuSSFlg\nbuO6WqbDSHMQ0Tl/dxOCwsfqSGPIqAtbP7+shErc4m+21+Y6GLPGQnd3Vc1VaZjp\ndY+okGaN+oaz5fVU0ew8AByxh4piXQQpkZ3F3SEbIQKBgQD/i2czHwU+Qnu44hLk\nAWO7Bzt48aLQck/IuPKdP0zAfhREHTFIzhoJL1wMFGVBv4DjZL/Bjwaa4bQYNjlw\n1uoTdTUuT5xZH/9ZrDqBQMpsSUpZPTBtLmumBPivTGG+DIRjIu3Ykts4reg1cGjT\nMCE7bTVwdv9XYw+1JtVc8XCq4QKBgQC/XbGCDFTqqsCZhtia4mLEj/EzAGmdkXCy\niBiZRfS/kEWs2GeWb+jGlNtffAnd9WsQpEEnzruLmRDjQt+fjJY5Nq9rtjIuyQFC\nk8H7h/4YpDYRSbTK3gAOnMOdVsxwMr0ljVb3/7063AXV6Qv+wakOvbFF+VWu3xAB\nRVXh0ELmeQKBgHCONDxeE28i1V/Po8ZtnkHIo7dXpwDs+JtOav473VCDt+Vwfj61\nGN6mz4I6kYbuFJUT0SouFxitBSgM6iv7XUqIu43UXucaotwacgJwSTh855R60ROl\n+KA9XFPJ7ttIpB8OSXi05n4Gi1rOUj2C24BTT9BjeYBCD68Yla3EYn3BAoGAEl0a\nWKF4UKCcJN90z8AjvDsX6U4D1JQNXYSD38l/yBY/KWwG3L/WdZ/5QTt08vDHGmy4\nt+o1wxqoLTbQoM3r6Ief49UzEZxGW640MkAFmTXA3n3VNJaDKOPQPbwDmEy2K/FZ\nRCktboWIpdNcTFEnOPvpFA7uMv7C2Wxe5nGGyfkCgYEAidoK/86XnX/oVslhZ2sM\nCUxStWkMKq1o1kYsdaKjNZSW/KlDYFvGVVPSrLCMPDx6RSmQc6XlfMm4T0KYfkYw\nWImw1ghrSrIWVBHAquBD9JY4ql0hkeGA887BNQT77okdlFLDatDoUq1uvCnVq6iS\nP5giE0as7yw3M40l1cLQw3I=\n-----END PRIVATE KEY-----\n",
+  "client_email": "voice-recon@skillful-air-257614.iam.gserviceaccount.com",
+  "client_id": "105706616926562106105",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/voice-recon%40skillful-air-257614.iam.gserviceaccount.com"
+}
